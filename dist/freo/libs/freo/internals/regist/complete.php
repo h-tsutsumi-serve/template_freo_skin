@@ -11,19 +11,19 @@
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//新規登録チェック
-	if ($freo->user['id'] or !$freo->config['user']['regist']) {
-		freo_redirect('default');
-	}
+  //新規登録チェック
+  if ($freo->user['id'] or !$freo->config['user']['regist']) {
+    freo_redirect('default');
+  }
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'token' => freo_token('create')
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'token' => freo_token('create')
+  ));
 
-	return;
+  return;
 }
 
 ?>

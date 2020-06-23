@@ -11,37 +11,37 @@
 /* メイン処理 */
 function freo_display_comment_count()
 {
-	global $freo;
+  global $freo;
 
-	if (!$freo->smarty->get_template_vars('entries')) {
-		return;
-	}
+  if (!$freo->smarty->get_template_vars('entries')) {
+    return;
+  }
 
-	//エントリーID取得
-	$entry_keys = array_keys($freo->smarty->get_template_vars('entries'));
+  //エントリーID取得
+  $entry_keys = array_keys($freo->smarty->get_template_vars('entries'));
 
-	//データ初期化
-	$comment_counts = array();
-	foreach ($entry_keys as $entry) {
-		$comment_counts[$entry] = 0;
-	}
+  //データ初期化
+  $comment_counts = array();
+  foreach ($entry_keys as $entry) {
+    $comment_counts[$entry] = 0;
+  }
 
-	//エントリーごとのコメント数取得
-	$stmt = $freo->pdo->query('SELECT entry_id, COUNT(*) FROM ' . FREO_DATABASE_PREFIX . 'comments WHERE entry_id IN(' . implode(',', $entry_keys) . ') GROUP BY entry_id');
-	if (!$stmt) {
-		freo_error($freo->pdo->errorInfo());
-	}
+  //エントリーごとのコメント数取得
+  $stmt = $freo->pdo->query('SELECT entry_id, COUNT(*) FROM ' . FREO_DATABASE_PREFIX . 'comments WHERE entry_id IN(' . implode(',', $entry_keys) . ') GROUP BY entry_id');
+  if (!$stmt) {
+    freo_error($freo->pdo->errorInfo());
+  }
 
-	while ($data = $stmt->fetch(PDO::FETCH_NUM)) {
-		$comment_counts[$data[0]] = $data[1];
-	}
+  while ($data = $stmt->fetch(PDO::FETCH_NUM)) {
+    $comment_counts[$data[0]] = $data[1];
+  }
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'plugin_comment_counts' => $comment_counts
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'plugin_comment_counts' => $comment_counts
+  ));
 
-	return;
+  return;
 }
 
 ?>

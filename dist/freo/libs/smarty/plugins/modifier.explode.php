@@ -22,11 +22,11 @@
  */
 function smarty_modifier_explode($string, $delimiter, $limit = null)
 {
-	if ($limit) {
-	    return explode($delimiter, $string, $limit);
-	} else {
-	    return explode($delimiter, $string);
-	}
+  if ($limit) {
+      return explode($delimiter, $string, $limit);
+  } else {
+      return explode($delimiter, $string);
+  }
 }
 
 ?>

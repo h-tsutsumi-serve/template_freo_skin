@@ -20,15 +20,15 @@
  */
 function smarty_modifier_nl2p($string)
 {
-	$string = preg_replace("/\r?\n/", "\r", $string);
-	$string = preg_replace("/\r/", "\n", $string);
+  $string = preg_replace("/\r?\n/", "\r", $string);
+  $string = preg_replace("/\r/", "\n", $string);
 
-	$lines  = preg_split('/\n{2,}/', $string);
-	$string = '';
+  $lines  = preg_split('/\n{2,}/', $string);
+  $string = '';
 
-	foreach ($lines as $line) {
-		$string .= "<p>" . nl2br($line) . "</p>\n";
-	}
+  foreach ($lines as $line) {
+    $string .= "<p>" . nl2br($line) . "</p>\n";
+  }
 
     return $string;
 }

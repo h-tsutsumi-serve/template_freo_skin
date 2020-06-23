@@ -11,28 +11,28 @@
 /* ルーティング定義 */
 function freo_routing_config()
 {
-	global $freo;
+  global $freo;
 
-	$freo->routing = array(
-		'rss'  => 'feed',
-		'rss2' => 'feed/rss2'
-	);
+  $freo->routing = array(
+    'rss'  => 'feed',
+    'rss2' => 'feed/rss2'
+  );
 
-	return;
+  return;
 }
 
 /* ルーティング実行 */
 function freo_routing_execute()
 {
-	global $freo;
+  global $freo;
 
-	$path = implode('/', $freo->parameters);
+  $path = implode('/', $freo->parameters);
 
-	if (isset($freo->routing[$path])) {
-		$freo->parameters = explode('/', $freo->routing[$path]);
-	}
+  if (isset($freo->routing[$path])) {
+    $freo->parameters = explode('/', $freo->routing[$path]);
+  }
 
-	return;
+  return;
 }
 
 ?>

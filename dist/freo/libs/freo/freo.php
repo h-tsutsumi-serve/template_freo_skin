@@ -10,7 +10,7 @@
 
 //外部ファイル読み込み
 if (FREO_HTTP_URL == 'http://www.example.com/freo/') {
-	require_once FREO_MAIN_DIR . 'freo/prepare.php';
+  require_once FREO_MAIN_DIR . 'freo/prepare.php';
 }
 
 require_once FREO_MAIN_DIR . 'smarty/Smarty.class.php';
@@ -19,17 +19,17 @@ require_once FREO_MAIN_DIR . 'freo/config.php';
 require_once FREO_MAIN_DIR . 'freo/common.php';
 
 if (FREO_INITIALIZE_MODE) {
-	require_once FREO_MAIN_DIR . 'freo/initialize.php';
+  require_once FREO_MAIN_DIR . 'freo/initialize.php';
 }
 if (FREO_ROUTING_MODE) {
-	require_once FREO_MAIN_DIR . 'freo/routing.php';
+  require_once FREO_MAIN_DIR . 'freo/routing.php';
 }
 if (FREO_TRANSFER_MODE) {
-	require_once FREO_MAIN_DIR . 'freo/transfer.php';
+  require_once FREO_MAIN_DIR . 'freo/transfer.php';
 }
 if (FREO_PICTOGRAM_MODE) {
-	require_once FREO_MAIN_DIR . 'HTML/Emoji.php';
-	require_once FREO_MAIN_DIR . 'freo/pictogram.php';
+  require_once FREO_MAIN_DIR . 'HTML/Emoji.php';
+  require_once FREO_MAIN_DIR . 'freo/pictogram.php';
 }
 
 //セッション開始

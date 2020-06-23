@@ -11,31 +11,31 @@
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//ログイン状態確認
-	if ($freo->user['authority'] != 'root') {
-		freo_redirect('login', true);
-	}
+  //ログイン状態確認
+  if ($freo->user['authority'] != 'root') {
+    freo_redirect('login', true);
+  }
 
-	//オプション取得
-	$stmt = $freo->pdo->query('SELECT * FROM ' . FREO_DATABASE_PREFIX . 'options ORDER BY sort, id');
-	if (!$stmt) {
-		freo_error($freo->pdo->errorInfo());
-	}
+  //オプション取得
+  $stmt = $freo->pdo->query('SELECT * FROM ' . FREO_DATABASE_PREFIX . 'options ORDER BY sort, id');
+  if (!$stmt) {
+    freo_error($freo->pdo->errorInfo());
+  }
 
-	$options = array();
-	while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$options[$data['id']] = $data;
-	}
+  $options = array();
+  while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $options[$data['id']] = $data;
+  }
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'token'   => freo_token('create'),
-		'options' => $options
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'token'   => freo_token('create'),
+    'options' => $options
+  ));
 
-	return;
+  return;
 }
 
 ?>

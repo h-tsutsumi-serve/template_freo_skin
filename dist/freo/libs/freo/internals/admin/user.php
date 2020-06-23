@@ -14,38 +14,38 @@ require_once FREO_MAIN_DIR . 'freo/internals/associate_user.php';
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//ログイン状態確認
-	if ($freo->user['authority'] != 'root') {
-		freo_redirect('login', true);
-	}
+  //ログイン状態確認
+  if ($freo->user['authority'] != 'root') {
+    freo_redirect('login', true);
+  }
 
-	//ユーザー取得
-	$stmt = $freo->pdo->query('SELECT * FROM ' . FREO_DATABASE_PREFIX . 'users ORDER BY id');
-	if (!$stmt) {
-		freo_error($freo->pdo->errorInfo());
-	}
+  //ユーザー取得
+  $stmt = $freo->pdo->query('SELECT * FROM ' . FREO_DATABASE_PREFIX . 'users ORDER BY id');
+  if (!$stmt) {
+    freo_error($freo->pdo->errorInfo());
+  }
 
-	$users = array();
-	while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$users[$data['id']] = $data;
-	}
+  $users = array();
+  while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $users[$data['id']] = $data;
+  }
 
-	//ユーザーID取得
-	$user_keys = array_keys($users);
+  //ユーザーID取得
+  $user_keys = array_keys($users);
 
-	//ユーザー関連データ取得
-	$user_associates = freo_associate_user('get', $user_keys);
+  //ユーザー関連データ取得
+  $user_associates = freo_associate_user('get', $user_keys);
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'token'           => freo_token('create'),
-		'users'           => $users,
-		'user_associates' => $user_associates
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'token'           => freo_token('create'),
+    'users'           => $users,
+    'user_associates' => $user_associates
+  ));
 
-	return;
+  return;
 }
 
 ?>

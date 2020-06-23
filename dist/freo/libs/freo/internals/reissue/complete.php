@@ -11,14 +11,14 @@
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'token' => freo_token('create')
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'token' => freo_token('create')
+  ));
 
-	return;
+  return;
 }
 
 ?>

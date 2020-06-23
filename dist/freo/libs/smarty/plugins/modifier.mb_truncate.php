@@ -23,9 +23,9 @@
  */
 function smarty_modifier_mb_truncate($string, $width = 0, $trimmarker = '...', $encoding = 'UTF-8')
 {
-	if (mb_strlen($string, $encoding) > $width) {
-		$string = mb_substr($string, 0, $width, $encoding) . $trimmarker;
-	}
+  if (mb_strlen($string, $encoding) > $width) {
+    $string = mb_substr($string, 0, $width, $encoding) . $trimmarker;
+  }
 
     return $string;
 }

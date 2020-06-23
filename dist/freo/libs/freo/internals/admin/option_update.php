@@ -11,45 +11,45 @@
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//ログイン状態確認
-	if ($freo->user['authority'] != 'root') {
-		freo_redirect('login', true);
-	}
+  //ログイン状態確認
+  if ($freo->user['authority'] != 'root') {
+    freo_redirect('login', true);
+  }
 
-	//ワンタイムトークン確認
-	if (!freo_token('check')) {
-		freo_redirect('admin/option?error=1');
-	}
+  //ワンタイムトークン確認
+  if (!freo_token('check')) {
+    freo_redirect('admin/option?error=1');
+  }
 
-	//データ登録
-	if (isset($_POST['sort'])) {
-		foreach ($_POST['sort'] as $id => $sort) {
-			if (!preg_match('/^[\w\-\/]+$/', $id)) {
-				continue;
-			}
-			if (!preg_match('/^\d+$/', $sort)) {
-				continue;
-			}
+  //データ登録
+  if (isset($_POST['sort'])) {
+    foreach ($_POST['sort'] as $id => $sort) {
+      if (!preg_match('/^[\w\-\/]+$/', $id)) {
+        continue;
+      }
+      if (!preg_match('/^\d+$/', $sort)) {
+        continue;
+      }
 
-			$stmt = $freo->pdo->prepare('UPDATE ' . FREO_DATABASE_PREFIX . 'options SET sort = :sort WHERE id = :id');
-			$stmt->bindValue(':sort', $sort, PDO::PARAM_INT);
-			$stmt->bindValue(':id',   $id);
-			$flag = $stmt->execute();
-			if (!$flag) {
-				freo_error($stmt->errorInfo());
-			}
-		}
-	}
+      $stmt = $freo->pdo->prepare('UPDATE ' . FREO_DATABASE_PREFIX . 'options SET sort = :sort WHERE id = :id');
+      $stmt->bindValue(':sort', $sort, PDO::PARAM_INT);
+      $stmt->bindValue(':id',   $id);
+      $flag = $stmt->execute();
+      if (!$flag) {
+        freo_error($stmt->errorInfo());
+      }
+    }
+  }
 
-	//ログ記録
-	freo_log('オプションを並び替えました。');
+  //ログ記録
+  freo_log('オプションを並び替えました。');
 
-	//ページ管理へ移動
-	freo_redirect('admin/option?exec=sort');
+  //ページ管理へ移動
+  freo_redirect('admin/option?exec=sort');
 
-	return;
+  return;
 }
 
 ?>

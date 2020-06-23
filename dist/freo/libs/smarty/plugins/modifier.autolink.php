@@ -20,8 +20,8 @@
  */
 function smarty_modifier_autolink($string)
 {
-	$string = preg_replace('/(^|[^\"\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!])(https?\:\/\/[\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!]+)/', '$1<a href="$2">$2</a>', $string);
-	$string = preg_replace('/(^|[^\"\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!])([\w\.\+\-]+@[\w\.\+\-]+)/', '$1<a href="mailto:$2">$2</a>', $string);
+  $string = preg_replace('/(^|[^\"\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!])(https?\:\/\/[\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!]+)/', '$1<a href="$2">$2</a>', $string);
+  $string = preg_replace('/(^|[^\"\w\.\~\-\/\?\&\#\+\=\:\;\@\%\!])([\w\.\+\-]+@[\w\.\+\-]+)/', '$1<a href="mailto:$2">$2</a>', $string);
 
     return $string;
 }

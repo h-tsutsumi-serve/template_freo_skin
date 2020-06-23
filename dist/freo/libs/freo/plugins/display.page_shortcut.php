@@ -11,30 +11,30 @@
 /* メイン処理 */
 function freo_display_page_shortcut()
 {
-	global $freo;
+  global $freo;
 
-	$shortcuts = explode("\n", $freo->config['plugin']['page_shortcut']['shortcuts']);
+  $shortcuts = explode("\n", $freo->config['plugin']['page_shortcut']['shortcuts']);
 
-	$page_shortcuts = array();
-	foreach ($shortcuts as $shortcut) {
-		if (!$shortcut) {
-			continue;
-		}
+  $page_shortcuts = array();
+  foreach ($shortcuts as $shortcut) {
+    if (!$shortcut) {
+      continue;
+    }
 
-		list($id, $text) = explode(',', $shortcut, 2);
+    list($id, $text) = explode(',', $shortcut, 2);
 
-		$page_shortcuts[$id] = array(
-			'id'   => $id,
-			'text' => $text
-		);
-	}
+    $page_shortcuts[$id] = array(
+      'id'   => $id,
+      'text' => $text
+    );
+  }
 
-	//データ割当
-	$freo->smarty->assign(array(
-		'plugin_page_shortcuts' => $page_shortcuts
-	));
+  //データ割当
+  $freo->smarty->assign(array(
+    'plugin_page_shortcuts' => $page_shortcuts
+  ));
 
-	return;
+  return;
 }
 
 ?>

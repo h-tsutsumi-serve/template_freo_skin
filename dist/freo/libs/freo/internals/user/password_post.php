@@ -11,46 +11,46 @@
 /* メイン処理 */
 function freo_main()
 {
-	global $freo;
+  global $freo;
 
-	//ログイン状態確認
-	if ($freo->user['authority'] != 'guest') {
-		freo_redirect('login', true);
-	}
+  //ログイン状態確認
+  if ($freo->user['authority'] != 'guest') {
+    freo_redirect('login', true);
+  }
 
-	//入力データ確認
-	if (empty($_SESSION['input'])) {
-		freo_redirect('user?error=1', true);
-	}
+  //入力データ確認
+  if (empty($_SESSION['input'])) {
+    freo_redirect('user?error=1', true);
+  }
 
-	//ワンタイムトークン確認
-	if (!freo_token('check')) {
-		freo_redirect('user?error=1', true);
-	}
+  //ワンタイムトークン確認
+  if (!freo_token('check')) {
+    freo_redirect('user?error=1', true);
+  }
 
-	//入力データ取得
-	$password = $_SESSION['input']['password'];
+  //入力データ取得
+  $password = $_SESSION['input']['password'];
 
-	//データ登録
-	$stmt = $freo->pdo->prepare('UPDATE ' . FREO_DATABASE_PREFIX . 'users SET modified = :now, password = :new WHERE id = :id');
-	$stmt->bindValue(':now', date('Y-m-d H:i:s'));
-	$stmt->bindValue(':new', md5($password['new']));
-	$stmt->bindValue(':id',  $freo->user['id']);
-	$flag = $stmt->execute();
-	if (!$flag) {
-		freo_error($stmt->errorInfo());
-	}
+  //データ登録
+  $stmt = $freo->pdo->prepare('UPDATE ' . FREO_DATABASE_PREFIX . 'users SET modified = :now, password = :new WHERE id = :id');
+  $stmt->bindValue(':now', date('Y-m-d H:i:s'));
+  $stmt->bindValue(':new', md5($password['new']));
+  $stmt->bindValue(':id',  $freo->user['id']);
+  $flag = $stmt->execute();
+  if (!$flag) {
+    freo_error($stmt->errorInfo());
+  }
 
-	//入力データ破棄
-	$_SESSION['input'] = array();
+  //入力データ破棄
+  $_SESSION['input'] = array();
 
-	//ログ記録
-	freo_log('パスワードを変更しました。');
+  //ログ記録
+  freo_log('パスワードを変更しました。');
 
-	//パスワード入力へ移動
-	freo_redirect('user/password_form?exec=update', true);
+  //パスワード入力へ移動
+  freo_redirect('user/password_form?exec=update', true);
 
-	return;
+  return;
 }
 
 ?>

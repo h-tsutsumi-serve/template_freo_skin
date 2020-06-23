@@ -11,28 +11,28 @@
 /* 入力データ検証 */
 function freo_validate_login($mode, $input)
 {
-	global $freo;
+  global $freo;
 
-	$errors = array();
+  $errors = array();
 
-	//ユーザーID
-	if ($input['freo']['user'] == '') {
-		$errors[] = 'ユーザーIDが入力されていません。';
-	}
+  //ユーザーID
+  if ($input['freo']['user'] == '') {
+    $errors[] = 'ユーザーIDが入力されていません。';
+  }
 
-	//パスワード
-	if ($input['freo']['password'] == '') {
-		$errors[] = 'パスワードが入力されていません。';
-	}
+  //パスワード
+  if ($input['freo']['password'] == '') {
+    $errors[] = 'パスワードが入力されていません。';
+  }
 
-	//ログイン状態
-	if (!$errors) {
-		if (!$freo->user['id']) {
-			$errors[] = 'ユーザーIDもしくはパスワードが違います。';
-		}
-	}
+  //ログイン状態
+  if (!$errors) {
+    if (!$freo->user['id']) {
+      $errors[] = 'ユーザーIDもしくはパスワードが違います。';
+    }
+  }
 
-	return $errors;
+  return $errors;
 }
 
 ?>

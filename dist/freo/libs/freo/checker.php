@@ -10,22 +10,22 @@
 
 //アクセス可否確認
 if (!defined('FREO_HTTP_URL') or FREO_HTTP_URL != 'http://www.example.com/freo/') {
-	exit('checker.php');
+  exit('checker.php');
 }
 
 //外部ファイル読み込み
 if (file_exists(FREO_MAIN_DIR . 'freo/common.php')) {
-	require_once FREO_MAIN_DIR . 'freo/common.php';
+  require_once FREO_MAIN_DIR . 'freo/common.php';
 }
 if (defined('FREO_INITIALIZE_MODE') and FREO_INITIALIZE_MODE and file_exists(FREO_MAIN_DIR . 'freo/initialize.php')) {
-	require_once FREO_MAIN_DIR . 'freo/initialize.php';
+  require_once FREO_MAIN_DIR . 'freo/initialize.php';
 }
 
 //chmod使用確認
 if (defined('FREO_PERMISSION_MODE') and FREO_PERMISSION_MODE and @chmod(FREO_TEMPLATE_COMPILE_DIR, 0707)) {
-	$chmod = true;
+  $chmod = true;
 } else {
-	$chmod = false;
+  $chmod = false;
 }
 
 //データ出力
@@ -37,7 +37,7 @@ echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\
 echo "<title>PHP Checker</title>\n";
 
 if (file_exists(FREO_CSS_DIR . 'common.css')) {
-	echo "<link rel=\"stylesheet\" href=\"" . FREO_CSS_DIR . "common.css\" type=\"text/css\" media=\"all\" />\n";
+  echo "<link rel=\"stylesheet\" href=\"" . FREO_CSS_DIR . "common.css\" type=\"text/css\" media=\"all\" />\n";
 }
 
 echo "<style tyle=\"text/css\">\n";
@@ -93,13 +93,13 @@ echo "</tr>\n";
 echo "</table>\n";
 
 if (defined('FREO_PERMISSION_MODE') and FREO_PERMISSION_MODE) {
-	echo "<h2>Chmod</h2>\n";
-	echo "<table summary=\"Chmod\">\n";
-	echo "<tr>\n";
-	echo "<th>Chmod</th>\n";
-	echo "<td>" . ($chmod ? 'OK' : '<em>NG</em>') . "</td>\n";
-	echo "</tr>\n";
-	echo "</table>\n";
+  echo "<h2>Chmod</h2>\n";
+  echo "<table summary=\"Chmod\">\n";
+  echo "<tr>\n";
+  echo "<th>Chmod</th>\n";
+  echo "<td>" . ($chmod ? 'OK' : '<em>NG</em>') . "</td>\n";
+  echo "</tr>\n";
+  echo "</table>\n";
 }
 
 echo "<h2>Charset</h2>\n";
@@ -173,12 +173,12 @@ echo "<th>access</th>\n";
 echo "</tr>\n";
 
 foreach (ini_get_all() as $key => $value) {
-	echo "<tr>\n";
-	echo "<td>" . htmlspecialchars($key, ENT_QUOTES) . "</td>\n";
-	echo "<td>" . htmlspecialchars($value['global_value'], ENT_QUOTES) . "</td>\n";
-	echo "<td>" . htmlspecialchars($value['local_value'], ENT_QUOTES) . "</td>\n";
-	echo "<td>" . htmlspecialchars($value['access'], ENT_QUOTES) . "</td>\n";
-	echo "</tr>\n";
+  echo "<tr>\n";
+  echo "<td>" . htmlspecialchars($key, ENT_QUOTES) . "</td>\n";
+  echo "<td>" . htmlspecialchars($value['global_value'], ENT_QUOTES) . "</td>\n";
+  echo "<td>" . htmlspecialchars($value['local_value'], ENT_QUOTES) . "</td>\n";
+  echo "<td>" . htmlspecialchars($value['access'], ENT_QUOTES) . "</td>\n";
+  echo "</tr>\n";
 }
 
 echo "</table>\n";
