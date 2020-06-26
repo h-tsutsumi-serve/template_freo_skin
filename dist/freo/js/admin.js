@@ -113,19 +113,44 @@ $(document).ready(function() {
   $('a.colorbox').colorbox({ width:'80%', height:'80%', iframe:true });
 });
 
-//TinyMCE
+//TinyMCE4
 tinymce.init({
   language: 'ja',
-  selector:'#tiny_mce',
-  height: 500,
-  plugins: [
-    'advlist autolink lists link image charmap print preview anchor',
-    'searchreplace visualblocks code fullscreen',
-    'insertdatetime media table contextmenu paste code pagebreak'
+  selector: '#tiny_mce',
+  entity_encoding : 'raw',
+  extended_valid_elements: 'iframe[*]',
+  content_css: freo_path + 'css/common.css',
+  convert_urls: false,
+  plugins: 'advlist image link autosave contextmenu fullscreen pagebreak searchreplace table lists charmap code media textcolor',
+  menubar: 'file edit insert format table tools',
+  menu: {
+    file: {title: 'File', items: 'newdocument'},
+    edit: {title: 'Edit', items: 'undo redo | cut copy paste | selectall searchreplace'},
+    insert: {title: 'Insert', items: 'link | image media | pagebreak charmap template'},
+    format: {title: 'Format', items: 'bold underline strikethrough superscript subscript | formats | removeformat'},
+    table: {title: 'Table', items: 'inserttable | itableprops deletetable cell row column'},
+    tools: {title: 'Tools', items: 'code fullscreen'}
+  },
+  toolbar1: "bold strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect | code fullscreen",
+  toolbar2: "fontsizeselect | forecolor backcolor removeformat | link unlink image media charmap pagebreak | searchreplace | undo redo |",
+  fontsize_formats: "10px 12px 14px 16px 18px 20px 22px",
+  style_formats: [
+    {title: "見出し", items: [
+      {title: "見出し4", format: "h4"},
+      {title: "見出し5", format: "h5"},
+      {title: "見出し6", format: "h6"}
+    ]},
+    {title: "ブロック", items: [
+      {title: "段落", format: "p"},
+      {title: "引用", format: "blockquote"},
+      {title: "整形済み", format: "pre"},
+      {title: "コード", format: "code"},
+    ]},
+    {title: "配置", items: [
+      {title: "左揃え", icon: "alignleft", format: "alignleft"},
+      {title: "中央揃え", icon: "aligncenter", format: "aligncenter"},
+      {title: "右揃え", icon: "alignright", format: "alignright"},
+      {title: "均等揃え", icon: "alignjustify", format: "alignjustify"}
+    ]},
   ],
-  toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image pagebreak',
-  content_css: [
-    freo_path + 'css/common.css',
-  ],
-  convert_urls: false
 });
