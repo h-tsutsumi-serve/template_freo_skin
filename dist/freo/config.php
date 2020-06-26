@@ -33,7 +33,7 @@ define('FREO_HTTP_URL', 'http://www.example.com/freo/');
 define('FREO_HTTPS_URL', '');
 
 //mod_rewriteへの対応(true ... 対応する / false ... 対応しない)
-define('FREO_REWRITE_MODE', false);
+define('FREO_REWRITE_MODE', true);
 
 /********* データベースの設定 ***************************************/
 
