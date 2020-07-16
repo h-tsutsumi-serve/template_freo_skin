@@ -1,0 +1,13 @@
+<!--{foreach from=$freo.refer.categories|smarty:nodefaults item='refer_category'}-->
+  <!--{if $refer_category.pid == $pid and $refer_category.display == 'publish'}-->
+  <div class="utility_list">
+    <a href="{$freo.core.http_file}/category/{$refer_category.id}">{$refer_category.name}</a>({$plugin_category_counts[$refer_category.id]|default:0})
+    <!--{assign var="pid" value=$refer_category.id}-->
+    {include file='utility_category.html'}
+    <!--{assign var="pid" value=$refer_category.pid}-->
+  </div>
+  <!--{php}$flag = 1;{/php}-->
+  <!--{/if}-->
+<!--{foreachelse}-->
+<div>カテゴリーが登録されていません。</div>
+<!--{/foreach}-->

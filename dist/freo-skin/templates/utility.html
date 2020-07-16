@@ -1,0 +1,64 @@
+  <div id="utility">
+    <div class="utility">
+      <h3>{$plugin_entry_calender_year}年{$plugin_entry_calender_month}月</h3>
+      <div class="content">
+        <table summary="カレンダー" class="calender">
+          <tr>
+            <th>日</th>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+          </tr>
+          <!--{foreach from=$plugin_entry_calenders|smarty:nodefaults item='plugin_entry_calender' name='loop'}-->
+          <!--{if $smarty.foreach.loop.index % 7 == 0}-->
+          <tr>
+          <!--{/if}-->
+          <!--{if $plugin_entry_calender.type == 'day'}-->
+            <td><!--{if $plugin_entry_calender.flag}--><a href="{$freo.core.http_file}/entry?date={$plugin_entry_calender.date}"><!--{/if}--><span class="day">{$plugin_entry_calender.day}</span><!--{if $plugin_entry_calender.flag}--></a><!--{/if}--></td>
+          <!--{elseif $plugin_entry_calender.type == 'satday'}-->
+            <td><!--{if $plugin_entry_calender.flag}--><a href="{$freo.core.http_file}/entry?date={$plugin_entry_calender.date}"><!--{/if}--><span class="satday">{$plugin_entry_calender.day}</span><!--{if $plugin_entry_calender.flag}--></a><!--{/if}--></td>
+          <!--{elseif $plugin_entry_calender.type == 'sunday'}-->
+            <td><!--{if $plugin_entry_calender.flag}--><a href="{$freo.core.http_file}/entry?date={$plugin_entry_calender.date}"><!--{/if}--><span class="sunday">{$plugin_entry_calender.day}</span><!--{if $plugin_entry_calender.flag}--></a><!--{/if}--></td>
+          <!--{else}-->
+            <td>-</td>
+          <!--{/if}-->
+          <!--{if $smarty.foreach.loop.index % 7 == 6}-->
+          </tr>
+          <!--{/if}-->
+          <!--{/foreach}-->
+        </table>
+        <ul class="calenderNav">
+          <li><a href="{$freo.core.http_file}/entry?date={$plugin_entry_calender_previous}">前の月</a></li>
+          <li><a href="{$freo.core.http_file}/entry?date={$plugin_entry_calender_next}">次の月</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="utility">
+      <h3>カテゴリー</h3>
+      <div class="content">
+        {include file='utility_category.html'}
+      </div>
+    </div>
+    <div class="utility">
+      <h3>検索</h3>
+      <div class="content">
+        <form action="{$freo.core.http_file}/entry" method="get">
+          <div><input type="text" name="word" value="{$smarty.get.word}" /></div>
+          <p class="search-button"><input type="submit" value="検索する" /></p>
+        </form>
+      </div>
+    </div>
+    <!--{if $plugin_entry_recentries|smarty:nodefaults}-->
+    <div class="utility">
+      <h3>新着エントリー</h3>
+      <div class="content">
+        <!--{foreach from=$plugin_entry_recentries|smarty:nodefaults item='plugin_entry_recently'}-->
+        <div class="utility_list"><small>{$plugin_entry_recently.datetime|date_format:'%Y/%m/%d'}：</small><a href="{$freo.core.http_file}/view/{if $plugin_entry_recently.code}{$plugin_entry_recently.code}{else}{$plugin_entry_recently.id}{/if}">{$plugin_entry_recently.title}</a></div>
+        <!--{/foreach}-->
+      </div>
+    </div>
+    <!--{/if}-->
+  </div>

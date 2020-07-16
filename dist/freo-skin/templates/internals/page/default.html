@@ -1,0 +1,66 @@
+{include file='header.html'}
+  <div id="freo-content">
+   <div id="entry">
+      <!--{if $freo.query.id}-->
+        <div class="entry">
+          <h2>{$page.title}</h2>
+          <!--{if $page.restriction == 'user' and !$page_security}-->
+            <p class="attention">このページは、登録ユーザーのみに公開されています。</p>
+          <!--{elseif $page.restriction == 'group' and !$page_security}-->
+            <p class="attention">このページは、一部のグループのみに公開されています。</p>
+          <!--{elseif $page.restriction == 'password' and !$page_security}-->
+            <p class="attention">このページは、パスワードで認証した人のみに公開されています。</p>
+          <!--{/if}-->
+          <!--{if $page.file and $page.image}-->
+            <p><a href="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_files/{$page.id}/{$page.file}"><img src="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_images/{$page.id}/{$page.image}" alt="{$page.memo|default:$page.file}" title="{$page.memo|default:$page.file}" width="{$page_image.width}" height="{$page_image.height}" /></a></p>
+          <!--{elseif $page_thumbnail}-->
+            <p><a href="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_files/{$page.id}/{$page.file}"><img src="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_thumbnails/{$page.id}/{$page.file}" alt="{$page.memo|default:$page.file}" title="{$page.memo|default:$page.file}" width="{$page_thumbnail.width}" height="{$page_thumbnail.height}" /></a></p>
+          <!--{elseif $page.file and $page_file.width and $page_file.height}-->
+            <p><img src="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_files/{$page.id}/{$page.file}" alt="{$page.memo|default:$page.file}" title="{$page.memo|default:$page.file}" width="{$page_file.width}" height="{$page_file.height}" /></p>
+          <!--{elseif $page.file}-->
+            <p><a href="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}page_files/{$page.id}/{$page.file}">{$page.memo|default:$page.file}</a></p>
+          <!--{/if}-->
+          <!--{if $page_text.excerpt}-->
+            {$page_text.excerpt|smarty:nodefaults}
+          <!--{/if}-->
+          <!--{if $page_text.more}-->
+            <!--{if $freo.query.continue}-->
+            <div id="continue">
+              {$page_text.more|smarty:nodefaults}
+            </div>
+            <!--{else}-->
+            <p><a href="{$freo.core.http_file}/page/{$page.id}?continue=1#continue">続きを読む</a></p>
+            <!--{/if}-->
+          <!--{/if}-->
+          <!--{if $page.restriction == 'password' and !$smarty.session.security.page[$page.id] and $freo.user.authority != 'root' and $freo.user.authority != 'author'}-->
+            <form action="{$freo.core.http_file}/page/{$page.id}" method="post">
+              <div><input type="text" name="page[password]" size="30" value="" /></div>
+              <p class="search-button"><input type="submit" value="認証する" /></p>
+            </form>
+          <!--{/if}-->
+          <!--{if $freo.user.authority == 'root' or $freo.user.id == $page.user_id}-->
+            <ul class="link">
+              <li><a href="{$freo.core.http_file}/admin/page_form?id={$page.id}"><img src="{$freo.core.http_url}images/icons/edit.png" alt="編集" title="編集" width="16" height="16" /></a></li>
+            </ul>
+          <!--{/if}-->
+        </div>
+      <!--{else}-->
+        <!--{foreach from=$pages|smarty:nodefaults item='page'}-->
+        <div class="entry">
+          <h3>{$page.title}</h3>
+          <!--{if $page_texts[$page.id].excerpt}-->
+            {$page_texts[$page.id].excerpt|smarty:nodefaults}
+          <!--{/if}-->
+        </div>
+        <!--{/foreach}-->
+        <div id="page">
+          <h2>ページ移動</h2>
+          <ul class="order">
+            <li><!--{if $freo.query.page > 1}--><a href="{$freo.core.http_file}/page?page={$freo.query.page-1}{if $smarty.get.word}&amp;word={$smarty.get.word|smarty:nodefaults|escape:'url'}{/if}{if $smarty.get.user}&amp;user={$smarty.get.user}{/if}{if $smarty.get.tag}&amp;tag={$smarty.get.tag|smarty:nodefaults|escape:'url'}{/if}{if $smarty.get.date}&amp;date={$smarty.get.date}{/if}">＜ｐｒｅｖ</a><!--{else}-->＜ｐｒｅｖ<!--{/if}--></li>
+            <li><!--{if $page_page > $freo.query.page}--><a href="{$freo.core.http_file}/page?page={$freo.query.page+1}{if $smarty.get.word}&amp;word={$smarty.get.word|smarty:nodefaults|escape:'url'}{/if}{if $smarty.get.user}&amp;user={$smarty.get.user}{/if}{if $smarty.get.tag}&amp;tag={$smarty.get.tag|smarty:nodefaults|escape:'url'}{/if}{if $smarty.get.date}&amp;date={$smarty.get.date}{/if}">ｎｅｘｔ＞</a><!--{else}-->ｎｅｘｔ＞<!--{/if}--></li>
+          </ul>
+        </div>
+      <!--{/if}-->
+    </div>
+  </div>
+{include file='footer.html'}
