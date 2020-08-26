@@ -66,34 +66,28 @@ img {
 /**********************************************************/
 /* エントリー */
 /**********************************************************/
-#entry {
+#entry .entry {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-#entry .entry_title,
-#entry .entry_content {
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
-#entry .entry_title {
-  width: 100px;
+#entry .entry .date {
+  width: 110px;
 }
 
-#entry .entry_content {
-  width: calc(100% - 100px);
-  margin-left: 0;
-}
-
-#entry .entry_content > *:first-child {
-  margin-top: 0;
+#entry .entry .content {
+  width: calc(100% - 110px)
 }
 
 /**********************************************************/
 /* エントリー記事内 */
 /**********************************************************/
+#entry .entry h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #entry .entry .content .media-photo {
   max-width: 48%;
   height: auto;
