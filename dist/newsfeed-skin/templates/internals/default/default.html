@@ -8,13 +8,6 @@
         <dd class="description">
           <h3 class="title">{$entry.title}</h3>
           <div class="content">
-            <!--{if $entry.restriction == 'user' and !$entry_securities[$entry.id]}-->
-            <p class="attention">このエントリーは、登録ユーザーのみに公開されています。</p>
-            <!--{elseif $entry.restriction == 'group' and !$entry_securities[$entry.id]}-->
-            <p class="attention">このエントリーは、一部のグループのみに公開されています。</p>
-            <!--{elseif $entry.restriction == 'password' and !$entry_securities[$entry.id]}-->
-            <p class="attention">このエントリーは、パスワードで認証した人のみに公開されています。</p>
-            <!--{/if}-->
             <!--{if $entry_thumbnails[$entry.id]}-->
             <p><img src="{$freo.core.http_url}{$smarty.const.FREO_FILE_DIR}entry_files/{$entry.id}/{$entry.file}" alt="{$entry.memo|default:$entry.file}" style="max-width: {$entry_files[$entry.id].width}px;" width="100%" height="auto" /></p>
             <!--添付ファイルから画像を投稿（自動サムネイル有）-->
@@ -28,12 +21,6 @@
             <!--{if $entry_texts[$entry.id].excerpt}-->
             {$entry_texts[$entry.id].excerpt|smarty:nodefaults}
             <!--{/if}-->
-            <!--{if $entry.restriction == 'password' and !$smarty.session.security.entry[$entry.id] and $freo.user.authority != 'root' and $freo.user.authority != 'author'}-->
-            <form action="{$freo.core.http_file}/view/{if $entry.code}{$entry.code}{else}{$entry.id}{/if}" method="post">
-              <div><input type="text" name="entry[password]" size="30" value="" /></div>
-              <p class="search-button"><input type="submit" value="認証する" /></p>
-            </form>
-            <!--{/if}-->
             <!--{if $entry_associates[$entry.id].option}-->
             <p class="option-photo">
               <!--{foreach from=$freo.refer.options|smarty:nodefaults item='option'}-->
@@ -43,13 +30,6 @@
               <!--{/if}-->
               <!--{/foreach}-->
             </p>
-            <!--{foreach from=$freo.refer.options|smarty:nodefaults item='option'}-->
-            <!--{if $entry_associate.option[$option.id] != ''}-->
-            <!--{if $option.type != 'file'}-->
-            <p>{$entry_associate.option[$option.id]|nl2br}</p>
-            <!--{/if}-->
-            <!--{/if}-->
-            <!--{/foreach}-->
             <!--{/if}-->
           </div>
           <ul class="information">
@@ -57,7 +37,7 @@
             <li><!--{foreach from=$entry_associates[$entry.id].category|smarty:nodefaults key='entry_category' item='entry_category' name='loop'}--><a href="{$freo.core.http_file}/category/{$entry_category}">{$freo.refer.categories[$entry_category].name}</a><!--{if !$smarty.foreach.loop.last}-->,&nbsp;<!--{/if}--><!--{/foreach}--></li>
             <!--{/if}-->
             <!--{if $freo.user.authority == 'root' or $freo.user.id == $entry.user_id}-->
-            <li><a href="{$freo.core.http_file}/admin/entry_form?id={$entry.id}"><img src="{$freo.core.http_url}images/icons/edit.png" alt="編集" title="編集" width="16" height="16" /></a></li>
+            <li><a href="{$freo.core.http_file}/admin/entry_form?id={$entry.id}" target="_blank"><img src="{$freo.core.http_url}images/icons/edit.png" alt="編集" title="編集" width="16" height="16" /></a></li>
             <!--{/if}-->
           </ul>
         </dd>
