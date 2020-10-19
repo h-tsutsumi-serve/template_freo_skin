@@ -19,6 +19,7 @@
     <ul>
       <li>設定できる項目は以下のとおりです。</li>
     </ul>
+    <!--{if $freo.user.authority == 'root'}-->
     <h3>本体の設定</h3>
     <ul>
       <!--{foreach from=$internals|smarty:nodefaults item='internal'}-->
@@ -35,6 +36,7 @@
       <li>設定項目はありません。</li>
       <!--{/foreach}-->
     </ul>
+    <!--{/if}-->
     <!--{if $freo.query.type and $freo.query.file}-->
     <h2>{$config_name}</h2>
     <ul>
@@ -50,7 +52,6 @@
           <!--{foreach name='loop' from=$configs|smarty:nodefaults item='config'}-->
           <!--{if $config.type == 'section'}-->
           <!--{if !$smarty.foreach.loop.first}-->
-          </dl>
           <!--{/if}-->
           <h3>{$config.data}</h3>
           <dl>
